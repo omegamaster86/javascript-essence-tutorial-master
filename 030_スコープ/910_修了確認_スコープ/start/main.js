@@ -9,8 +9,9 @@
 function fn() {
     if(true) {
         let a = 'fn called';
+        return a; // ReferenceError: a is not defined
     }
-    return a; // ReferenceError: a is not defined
+    // return a;  ReferenceError: a is not defined
 }
 
 const result = fn();
