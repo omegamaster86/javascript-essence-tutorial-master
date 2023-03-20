@@ -47,14 +47,31 @@ fn2();
  * increment(); // 期待値->4
  */
 
-let num = 0;
-increment();
-increment();
-increment();
-increment();
+// let num = 0;
+// increment();
+// increment();
+// increment();
+// increment();
 
-function increment() {
-    num = num + 1;
-    console.log(num);
+// function increment() {
+//     num = num + 1;
+//     console.log(num);
+// }
+// 上記だとnumがどこからでも変更可能なので、下記の式に書き換えることで、
+// 関数外からの参照を防ぐ
+
+function incrementFactory() {
+    let num = 0;
+
+    function increment(){
+        num = num + 1;
+        console.log(num);
+    }
+    return increment;
 }
 
+const increment = incrementFactory();
+increment();
+increment();
+increment();
+increment();
