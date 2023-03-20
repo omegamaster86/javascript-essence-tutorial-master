@@ -47,3 +47,14 @@ fn2();
  * increment(); // 期待値->4
  */
 
+let num = 0;
+increment();
+increment();
+increment();
+increment();
+
+function increment() {
+    num = num + 1;
+    console.log(num);
+}
+
