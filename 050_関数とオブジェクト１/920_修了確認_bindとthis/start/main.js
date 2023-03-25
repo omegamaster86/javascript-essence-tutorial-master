@@ -1,6 +1,6 @@
 const person = {
     name: 'Tom',
-    bye: () => {
+    bye () {
         console.log('Bye ' + this.name);
     },
     hello: function (greeting) {
@@ -23,9 +23,21 @@ const person = {
      * ３．thisを一旦変数に代入
      */
 
-
+    hello1s() {
+        // setTimeout(this.hello.bind(this,"hello"),1000) 1
     
+    
+        // setTimeout(() => {
+        //     this.hello("hello"); 2
+        // },1000);
+
+        const _this = this;
+        setTimeout(function(){
+            _this.hello("hello"); 3
+        },1000);
+    }
 }
+person.hello1s();
 
 /**
  * 問題１：
@@ -33,7 +45,7 @@ const person = {
  * と出力されるように、以下のコード
  * の記載を変更しましょう。
  */
-setTimeout(person.hello, 1000);
+setTimeout(person.hello.bind(person,"hello"), 1000);
 
 /**
  * 問題２：
@@ -41,7 +53,7 @@ setTimeout(person.hello, 1000);
  * と出力されるように、
  * 以下のコードを変更してください。
  */
-alert(person.hello);
+// alert(person.hello("hello"));
 
 /**
  * 問題３：
