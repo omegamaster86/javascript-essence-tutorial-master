@@ -19,5 +19,17 @@ class Person {
   }
 }
 
+// const bob = new Person('Bob', 23);
+// setTimeout(bob.hello, 1000);
+
+// ①
+
+// const bob = new Person('Bob', 23);
+// setTimeout(bob.hello.bind(bob), 1000);
+
+// ②
 const bob = new Person('Bob', 23);
-setTimeout(bob.hello, 1000);
+setTimeout(bob.hello.bind(bob), 1000);
+setTimeout(function(){
+  bob.hello();
+},1000);

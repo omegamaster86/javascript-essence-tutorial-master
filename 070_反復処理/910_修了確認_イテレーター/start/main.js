@@ -22,7 +22,7 @@
  */
 
 
- 
+
 // const it = genStep(4, 10, 2);
 // let a = it.next();
 
