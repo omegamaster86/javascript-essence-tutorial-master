@@ -8,6 +8,7 @@
  * 
  */
 const KEY = 'test-data';
+let _dirty;
 
 class DataSource {
 	static getLocal(KEY) {
@@ -27,9 +28,18 @@ const targetObj = DataSource.getLocal(KEY) || {};
 
 const pxy = new Proxy(targetObj, {
 	set(target, prop, value, receiver) {
+		_dirty = true;
+
 		const result = Reflect.set(target, prop, value, receiver);
 
-		DataSource.setLocal(KEY, target);
+		// Promise.resolve().then(()を加える事で非同期とした
+		// if文で1回目はtrueとして2回目をfalseにする事で、1回だけの登録を可能にした
+		Promise.resolve().then(() => {
+			if(_dirty) {
+				_dirty = false
+				DataSource.setLocal(KEY, target);
+			}
+		});
 		
 		return result;
 	}
